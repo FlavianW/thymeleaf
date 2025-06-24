@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body style="margin:0; padding:0;">
+    <div th:fragment="sidebar">
+        <nav class="d-flex flex-column flex-shrink-0 bg-dark" style="position:fixed; top:0; left:0; width:250px; height:100vh; z-index:1030;">
+            <div class="mb-3 p-3">
+                <span class="text-light" style="font-size: 1.1rem;">Système de gestion RH</span><br/>
+                <span class="fw-light text-secondary text-light" style="font-size: 0.7rem;">Par Ynov</span>
+            </div>
+            <hr class="text-light m-0">
+            <ul class="nav nav-pills flex-column mb-auto p-3">
+                <li class="nav-item">
+                    <a href="/" class="nav-link link-dark text-primary">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/employees" class="nav-link link-dark text-primary">Employés</a>
+                </li>
+                <li>
+                    <a href="/candidats" class="nav-link link-dark text-primary">Candidats</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html> 

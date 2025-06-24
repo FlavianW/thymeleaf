@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Détail Candidat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <div th:replace="fragments/sidebar :: sidebar"></div>
+        </div>
+        <div class="col-10">
+            <h2 class="mt-4">Détail du candidat</h2>
+            <div class="mb-3 d-flex gap-2">
+                <a th:href="@{'/candidats/edit/' + ${candidat.id}}" class="btn btn-primary">Mettre à jour les données</a>
+                <a th:href="@{'/candidats/delete/' + ${candidat.id}}" class="btn btn-danger" onclick="return confirm('Supprimer ce candidat ?');">Supprimer le candidat</a>
+            </div>
+            <table class="table table-bordered w-75">
+                <tr><th>Nom</th><td th:text="${candidat.nom}"></td></tr>
+                <tr><th>Numéro d'identification</th><td th:text="${candidat.numeroIdentification}"></td></tr>
+                <tr><th>Adresse</th><td th:text="${candidat.adresse}"></td></tr>
+                <tr><th>Date de naissance</th><td th:text="${candidat.dateNaissance}"></td></tr>
+                <tr><th>Email</th><td th:text="${candidat.email}"></td></tr>
+                <tr><th>Téléphone</th><td th:text="${candidat.telephone}"></td></tr>
+                <tr><th>Domaine technique</th><td th:text="${candidat.domaineTechnique}"></td></tr>
+                <tr><th>Évaluation</th><td th:text="${candidat.evaluation}"></td></tr>
+                <tr><th>Date de l'entretien</th><td th:text="${candidat.dateEntretien}"></td></tr>
+                <tr><th>Observation</th><td th:text="${candidat.observation}"></td></tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html> 
