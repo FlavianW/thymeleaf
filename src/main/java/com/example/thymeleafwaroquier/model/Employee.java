@@ -3,6 +3,7 @@ package com.example.thymeleafwaroquier.model;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
+import java.util.List;
 
 @Entity
 public class Employee {
@@ -23,6 +24,10 @@ public class Employee {
     private String poste;
     private Double salaire;
     private String observations;
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Conge> conges;
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Absence> absences;
 
     // Getters et setters
     public Long getId() { return id; }

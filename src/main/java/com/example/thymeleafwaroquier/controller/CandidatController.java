@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 @Controller
 @RequestMapping("/candidats")
@@ -49,5 +50,12 @@ public class CandidatController {
         Candidat candidat = candidatService.getCandidatById(id);
         model.addAttribute("candidat", candidat);
         return "candidats/view";
+    }
+
+    @DeleteMapping("/{id}/ajax")
+    @ResponseBody
+    public ResponseEntity<?> deleteCandidatAjax(@PathVariable Long id) {
+        candidatService.deleteCandidat(id);
+        return ResponseEntity.ok().build();
     }
 } 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 @Controller
 @RequestMapping("/employees")
@@ -81,5 +82,12 @@ public class EmployeeController {
         absence.setFin(java.time.LocalDate.parse(fin));
         absenceService.saveAbsence(absence);
         return "redirect:/employees/view/" + id;
+    }
+
+    @DeleteMapping("/{id}/ajax")
+    @ResponseBody
+    public ResponseEntity<?> deleteEmployeeAjax(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
+        return ResponseEntity.ok().build();
     }
 } 

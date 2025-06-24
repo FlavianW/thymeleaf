@@ -12,25 +12,50 @@
             <div th:replace="fragments/sidebar :: sidebar"></div>
         </div>
         <div class="col-10">
-            <h2 class="mt-4">Détail du candidat</h2>
-            <div class="mb-3 d-flex gap-2">
-                <a th:href="@{'/candidats/edit/' + ${candidat.id}}" class="btn btn-primary">Mettre à jour les données</a>
-                <a th:href="@{'/candidats/delete/' + ${candidat.id}}" class="btn btn-danger" onclick="return confirm('Supprimer ce candidat ?');">Supprimer le candidat</a>
+            <div id="deleteMsg" style="display:none;" class="alert alert-success mt-4">Candidat supprimé avec succès.</div>
+            <div id="candidatDetail">
+                <h2 class="mt-4">Détail du candidat</h2>
+                <div class="mb-3 d-flex gap-2">
+                    <a th:href="@{'/candidats/edit/' + ${candidat.id}}" class="btn btn-primary">Mettre à jour les données</a>
+                    <a href="#" id="deleteBtn" class="btn btn-danger">Supprimer le candidat</a>
+                    <a href="/candidats" class="btn btn-secondary">Retour à la liste</a>
+                </div>
+                <table class="table table-bordered w-75">
+                    <tr><th>Nom</th><td th:text="${candidat.nom}"></td></tr>
+                    <tr><th>Numéro d'identification</th><td th:text="${candidat.numeroIdentification}"></td></tr>
+                    <tr><th>Adresse</th><td th:text="${candidat.adresse}"></td></tr>
+                    <tr><th>Date de naissance</th><td th:text="${candidat.dateNaissance}"></td></tr>
+                    <tr><th>Email</th><td th:text="${candidat.email}"></td></tr>
+                    <tr><th>Téléphone</th><td th:text="${candidat.telephone}"></td></tr>
+                    <tr><th>Domaine technique</th><td th:text="${candidat.domaineTechnique}"></td></tr>
+                    <tr><th>Évaluation</th><td th:text="${candidat.evaluation}"></td></tr>
+                    <tr><th>Date de l'entretien</th><td th:text="${candidat.dateEntretien}"></td></tr>
+                    <tr><th>Observation</th><td th:text="${candidat.observation}"></td></tr>
+                </table>
             </div>
-            <table class="table table-bordered w-75">
-                <tr><th>Nom</th><td th:text="${candidat.nom}"></td></tr>
-                <tr><th>Numéro d'identification</th><td th:text="${candidat.numeroIdentification}"></td></tr>
-                <tr><th>Adresse</th><td th:text="${candidat.adresse}"></td></tr>
-                <tr><th>Date de naissance</th><td th:text="${candidat.dateNaissance}"></td></tr>
-                <tr><th>Email</th><td th:text="${candidat.email}"></td></tr>
-                <tr><th>Téléphone</th><td th:text="${candidat.telephone}"></td></tr>
-                <tr><th>Domaine technique</th><td th:text="${candidat.domaineTechnique}"></td></tr>
-                <tr><th>Évaluation</th><td th:text="${candidat.evaluation}"></td></tr>
-                <tr><th>Date de l'entretien</th><td th:text="${candidat.dateEntretien}"></td></tr>
-                <tr><th>Observation</th><td th:text="${candidat.observation}"></td></tr>
-            </table>
         </div>
     </div>
 </div>
+<script th:inline="javascript">
+function deleteCandidat() {
+    if(confirm('Supprimer ce candidat ?')) {
+        fetch('/candidats/' + [[${candidat.id}]] + '/ajax', {method: 'DELETE'})
+            .then(resp => {
+                if(resp.ok) {
+                    document.getElementById('candidatDetail').style.display = 'none';
+                    document.getElementById('deleteMsg').style.display = 'block';
+                }
+            });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('deleteBtn');
+    if(btn) btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        deleteCandidat();
+    });
+});
+</script>
 </body>
 </html> 
