@@ -2,6 +2,7 @@ package com.example.thymeleafwaroquier.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Employee {
@@ -11,10 +12,13 @@ public class Employee {
     private String nom;
     private String numeroIdentification;
     private String adresse;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateNaissance;
     private String email;
     private String telephone;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate debutContrat;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate finContrat;
     private String poste;
     private Double salaire;
